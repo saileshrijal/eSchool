@@ -1,6 +1,8 @@
-﻿namespace eSchool.Models;
+﻿using Microsoft.AspNetCore.Identity;
 
-public class ApplicationUser
+namespace eSchool.Models;
+
+public class ApplicationUser:IdentityUser
 {
     
 }
