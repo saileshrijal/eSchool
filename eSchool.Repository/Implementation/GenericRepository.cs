@@ -1,57 +1,113 @@
 ﻿using System.Linq.Expressions;
 using eSchool.Repository.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace eSchool.Repository.Implementation;
 
 public class GenericRepository<T> : IDisposable, IGenericRepository<T> where T:class
 {
+    private readonly ApplicationDbContext _context;
+    private readonly DbSet<T> _dbSet;
+    public GenericRepository(ApplicationDbContext context)
+    {
+        _context = context;
+        _dbSet = context.Set<T>();
+    }
+
+    private bool disposed = false;
     public void Dispose()
     {
-        throw new NotImplementedException();
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    private void Dispose(bool disposing)
+    {
+        if (!this.disposed)
+        {
+            if (disposing)
+            {
+                _context.Dispose();
+            }
+        }
+
+        this.disposed = true;
     }
 
     public IEnumerable<T> GetAll(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = "")
     {
-        throw new NotImplementedException();
+        IQueryable<T> query = _dbSet;
+        if (filter != null)
+        {
+            query = query.Where(filter);
+        }
+
+        foreach (var includeProperty in
+                 includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+        {
+            query = query.Include(includeProperty);
+        }
+
+        if (orderBy != null)
+        {
+            return orderBy(query).ToList();
+        }
+        else
+        {
+            return query.ToList();
+        }
     }
 
     public T GetById(object id)
     {
-        throw new NotImplementedException();
+        return _dbSet.Find(id);
     }
 
-    public Task GetByIdAsync(object id)
+    public async Task<T> GetByIdAsync(object id)
     {
-        throw new NotImplementedException();
+        return await _dbSet.FindAsync(id);
     }
 
     public void Add(T entity)
     {
-        throw new NotImplementedException();
+        _dbSet.Add(entity);
     }
 
-    public Task<T> AddAsync(T entity)
+    public async Task<T> AddAsync(T entity)
     {
-        throw new NotImplementedException();
+        await _dbSet.AddAsync(entity);
+        return entity; 
     }
 
     public void Update(T entity)
     {
-        throw new NotImplementedException();
+        _dbSet.Attach(entity);
+        _context.Entry(entity).State = EntityState.Modified;
     }
 
-    public Task<T> UpdateAsync(T entity)
+    public async Task<T> UpdateAsync(T entity)
     {
-        throw new NotImplementedException();
+        _dbSet.Attach(entity);
+        _context.Entry(entity).State = EntityState.Modified;
+        return entity;
     }
 
     public void Delete(T entity)
     {
-        throw new NotImplementedException();
+        if (_context.Entry(entity).State == EntityState.Detached)
+        {
+            _dbSet.Attach(entity);
+        }
+        _dbSet.Remove(entity);
     }
 
-    public Task<T> DeleteAsync(object id)
+    public async Task<T> DeleteAsync(T entity)
     {
-        throw new NotImplementedException();
+        if (_context.Entry(entity).State == EntityState.Detached)
+        {
+            _dbSet.Attach(entity);
+        }
+        _dbSet.Remove(entity);
+        return entity;
     }
 }

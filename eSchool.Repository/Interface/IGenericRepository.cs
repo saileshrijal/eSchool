@@ -10,11 +10,11 @@ public interface IGenericRepository<T> : IDisposable where T:class
         string includeProperties = "");
 
     T GetById(Object id);
-    Task GetByIdAsync(Object id);
+    Task<T> GetByIdAsync(Object id);
     void Add(T entity);
     Task<T> AddAsync(T entity);
     void Update(T entity);
     Task<T> UpdateAsync(T entity);
     void Delete(T entity);
-    Task<T> DeleteAsync(Object id);
+    Task<T> DeleteAsync(T entity);
 }
