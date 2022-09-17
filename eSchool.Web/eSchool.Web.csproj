@@ -19,6 +19,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\eSchool.Repository\eSchool.Repository.csproj" />
+      <ProjectReference Include="..\eSchool.Utilities\eSchool.Utilities.csproj" />
     </ItemGroup>
 
 </Project>
