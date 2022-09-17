@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore.Internal;
+using eSchool.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,15 +14,16 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options=>options.UseSqlServer(connectionString));
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+builder.Services.AddDefaultIdentity<ApplicationUser>()
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
+builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddRazorPages();
 var app = builder.Build();
 
@@ -51,7 +53,7 @@ void DataSeeding()
 {
     using (var scope = app.Services.CreateScope())
     {
-        var DbInitializer = scope.ServiceProvider.GetRequiredService<DbInitializer>();
+        var DbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
         DbInitializer.Initialize();
     }
 }
