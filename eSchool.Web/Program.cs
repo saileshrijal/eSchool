@@ -35,7 +35,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+DataSeeding();
 app.UseRouting();
 app.UseAuthentication();;
 
@@ -46,3 +46,12 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+void DataSeeding()
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var DbInitializer = scope.ServiceProvider.GetRequiredService<DbInitializer>();
+        DbInitializer.Initialize();
+    }
+}
