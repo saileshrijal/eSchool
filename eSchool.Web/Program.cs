@@ -21,10 +21,11 @@ builder.Services.AddDefaultIdentity<ApplicationUser>()
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+builder.Services.AddTransient<ICourseService, CourseService>();
+builder.Services.AddTransient<IGradeService, GradeService>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 builder.Services.AddScoped<IDbInitializer, DbInitializer>();
-builder.Services.AddScoped<IGradeService, GradeService>();
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
