@@ -69,7 +69,7 @@ namespace eSchool.Services
         public void InsertGrade(GradeViewModel model)
         {
             var grade = new GradeViewModel().ConvertViewModel(model);
-            var vm = new GradeViewModel(grade);
+            _unitOfWork.GenericRepository<Grade>().Add(grade);
             _unitOfWork.save();
         }
 

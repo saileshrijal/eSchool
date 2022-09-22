@@ -27,7 +27,10 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\eSchool.Models\eSchool.Models.csproj" />
+      <ProjectReference Include="..\eSchool.Repository\eSchool.Repository.csproj" />
       <ProjectReference Include="..\eSchool.Services\eSchool.Services.csproj" />
+      <ProjectReference Include="..\eSchool.Utilities\eSchool.Utilities.csproj" />
       <ProjectReference Include="..\eSchool.ViewModels\eSchool.ViewModels.csproj" />
     </ItemGroup>
 

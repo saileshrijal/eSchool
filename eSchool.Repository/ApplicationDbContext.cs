@@ -11,4 +11,5 @@ public class ApplicationDbContext:IdentityDbContext<ApplicationUser>
     }
 
     public DbSet<ApplicationUser>? ApplicationUsers { get; set; }
+    public DbSet<Grade>? Grades { get; set; }
 }
