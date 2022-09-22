@@ -1,0 +1,24 @@
+﻿@model eSchool.ViewModels.GradeViewModel
+
+@{
+    ViewData["Title"] = "Grades";
+}
+
+<h1>Create</h1>
+
+<div>
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="Id" />
+        <div class="mb-3">
+            <label asp-for="Name"></label>
+            <input type="text" asp-for="Name" class="form-control"/>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" role="10" class="form-control"> </textarea>
+        </div>
+        <div class="mb-3">
+            <button type="submit">Create</button>
+        </div>
+    </form>
+</div>

@@ -14,23 +14,21 @@
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
-      <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.8" />
+      <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.9" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\eSchool.Repository\eSchool.Repository.csproj" />
-      <ProjectReference Include="..\eSchool.Utilities\eSchool.Utilities.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Areas\Admin\Controllers" />
-      <Folder Include="Areas\Admin\Views" />
       <Folder Include="Areas\Employee\Controllers" />
       <Folder Include="Areas\Employee\Views" />
       <Folder Include="Areas\Student\Controllers" />
       <Folder Include="Areas\Student\Views" />
       <Folder Include="Areas\Teacher\Controllers" />
       <Folder Include="Areas\Teacher\Views" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\eSchool.Services\eSchool.Services.csproj" />
+      <ProjectReference Include="..\eSchool.ViewModels\eSchool.ViewModels.csproj" />
     </ItemGroup>
 
 </Project>
