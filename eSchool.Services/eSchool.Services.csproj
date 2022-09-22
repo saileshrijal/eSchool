@@ -6,4 +6,13 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Mvc.RazorPages" Version="2.2.5" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\eSchool.Utilities\eSchool.Utilities.csproj" />
+      <ProjectReference Include="..\eSchool.ViewModels\eSchool.ViewModels.csproj" />
+    </ItemGroup>
+
 </Project>
