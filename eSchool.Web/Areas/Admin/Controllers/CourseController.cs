@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace eSchool.Web.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CourseController : Controller
     {
         private readonly ICourseService _courseService;

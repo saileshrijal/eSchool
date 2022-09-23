@@ -1,5 +1,5 @@
 ﻿using eSchool.Models;
-using eSchool.Repository.Implementation;
+using eSchool.Repository.Interface;
 using eSchool.Utilities;
 using eSchool.ViewModels;
 using System;
@@ -12,9 +12,9 @@ namespace eSchool.Services
 {
     public class CourseService : ICourseService
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CourseService(UnitOfWork unitOfWork)
+        public CourseService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
