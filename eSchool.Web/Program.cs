@@ -22,8 +22,8 @@ builder.Services.AddDefaultIdentity<ApplicationUser>()
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
-builder.Services.AddTransient<ICourseService, CourseService>();
 builder.Services.AddTransient<IGradeService, GradeService>();
+builder.Services.AddTransient<ICourseService, CourseService>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 builder.Services.AddRazorPages();
